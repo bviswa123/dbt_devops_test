@@ -14,7 +14,7 @@ steps:
   name: SettingProfile
   displayName: 'Downloading Profile for Snowflake'
   inputs:
-    secureFile: 'snowflake-dbt-demo-profile.yml'
+    secureFile: 'profile.yml'
 
 - script: |
     echo Installing $(SettingProfile.secureFilePath) to the ~/.dbt...

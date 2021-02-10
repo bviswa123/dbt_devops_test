@@ -5,17 +5,14 @@ WITH customer_nation_region AS (
       ON n_nationkey=c_nationkey
         JOIN snowflake_sample_data.tpch_sf1.region
         ON n_regionkey=r_regionkey
-),
-
-rename as (
+)
 
 SELECT
-    r_name AS region,
-    n_name AS nation,
-    n_nationkey AS nation_key,
-    c_name AS customer_name,
-    c_acctbal AS account_balance,
-    c_mktsegment As market_segment
+r_name AS region,
+n_name AS nation,
+n_nationkey AS nation_key,
+c_name AS customer_name,
+c_acctbal AS account_balance,
+c_mktsegment As market_segment
   FROM customer_nation_region
-)
-select * from rename
+  

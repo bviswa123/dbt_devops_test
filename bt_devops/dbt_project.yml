@@ -33,7 +33,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 models:
   dbt_devops:
-    database: jaffle_shop
-    schema: jaffle_shop_schema  # Applies to all files under models/example/
+    database: dbt_devops
+    schema: dbt_devops_schema # Applies to all files under models/example/
       
     materialized: view
