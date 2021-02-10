@@ -1,0 +1,32 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+container: 
+  image: python:3.7
+  options: -u root
+
+steps:
+
+- task: DownloadSecureFile@1
+  name: SettingProfile
+  displayName: 'Downloading Profile for Snowflake'
+  inputs:
+    secureFile: 'snowflake-dbt-demo-profile.yml'
+
+- script: |
+    echo Installing $(SettingProfile.secureFilePath) to the ~/.dbt...
+    mkdir ~/.dbt
+    cp $(SettingProfile.secureFilePath) ~/.dbt/profiles.yml
+  displayName: Installing Profile for Snowflake
+    
+- script: |
+    pip install dbt --user
+    export PATH=$PATH:/home/vsts_azpcontainer/.local/bin
+    cd snowflake_tpc_demo
+    dbt compile
+    dbt test
+    dbt run
+  displayName: 'Compile, Test, and Run'
